@@ -10,19 +10,24 @@
             <div class="container position-relative">
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
-                        <div class="text-center text-white">
+                        <div class="text-center text-dark">
 
-                        <section class="container">
-        <div class="card">
-            <p class="title">Probando estilo Mecanografia</p>
+                        <!--<section class="letras">
+                            <div class="card">
+                                <p class="title">Probando estilo Mecanografia</p>
 
-            <p class="title2">Probando estilo Mecanografia 2</p>
+                                <p class="title2">Probando estilo Mecanografia 2</p>
 
-            <p class="title2"><button class="success">Iniciar</button> </p>
-        </div>
-    </section>
+                                <p class="title2"><button class="success">Iniciar</button> </p>
+                            </div>
+                        </section>-->
                             <!-- Page heading-->
-                            <h1 class="mb-5">Roaring ForkCleaning Service</h1>
+                            <section class="letras">
+                    
+                            <h1 class="mb-1"> <p class="title2"> Schedule your </p> </h1>
+                            <h1 class="mb-1"> <p class="title2">appointment here</p></h1>
+
+                            
                             <!-- Signup form-->
                             <!-- * * * * * * * * * * * * * * *-->
                             <!-- * * SB Forms Contact Form * *-->
@@ -35,11 +40,10 @@
                                 <!-- Email address input-->
                                 <div class="row">
                                     <div class="col">
-                                        <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+                                        <!--<input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />-->
+                                        <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button>
                                     </div>
-                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
+                                     <!--<div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>-->
                                 </div>
                                 <!-- Submit success message-->
                                 <!---->
@@ -58,6 +62,8 @@
                                 <!-- an error submitting the form-->
                                 <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                             </form>
+                            </section>
+                            
                         </div>
                     </div>
                 </div>

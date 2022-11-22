@@ -1,4 +1,4 @@
-.container {
+.letras {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -14,7 +14,7 @@
   
   .title {
     font-family: "Courier New";
-    padding: 1rem;
+    padding: 0rem;
     overflow: hidden;
     white-space: nowrap;
     margin: 0 auto;
@@ -31,11 +31,11 @@
   
   .title2 {
     font-family: "Courier New";
-    padding: 1rem;
+    padding: 0rem;
     overflow: hidden;
     white-space: nowrap;
     margin: 0 auto;
-    animation: mecanografia2 4s steps(38) 1s 1 normal both;
+    animation: mecanografia2 4s steps(50) 1s 1 normal both;
   }
   @keyframes mecanografia2 {
     0% {
