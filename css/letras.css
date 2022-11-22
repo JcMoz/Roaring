@@ -1,0 +1,57 @@
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .card {
+    background-color: coral;
+    width: auto;
+    height: auto;
+    border-radius: 15px;
+    padding: 1rem;
+  }
+  
+  .title {
+    font-family: "Courier New";
+    padding: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: mecanografia 5s steps(30) infinite alternate;
+  }
+  @keyframes mecanografia {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  .title2 {
+    font-family: "Courier New";
+    padding: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: mecanografia2 4s steps(38) 1s 1 normal both;
+  }
+  @keyframes mecanografia2 {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  .success {
+    width: 100%;
+    margin: 2em 0 1em 0;
+    background-color: white;
+    color: coral;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    padding: 1em 0;
+  }
