@@ -70,6 +70,15 @@
   box-sizing: border-box;
 }
 
+img.grande{
+  width: 600px;
+  height: 450px;
+}
+img.mediana{
+  width: 500px;
+  height: 500px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
@@ -7772,7 +7781,7 @@ textarea.form-control-lg {
 
 .text-muted {
   --bs-text-opacity: 1;
-  color: #6c757d !important;
+  color: #fff !important;
 }
 
 .text-black-50 {
@@ -11383,7 +11392,7 @@ p {
     transition: font-size 0.3s ease-in-out;
   }
   #mainNav .navbar-brand img {
-    height: 2rem;
+    height: 4rem;
     transition: height 0.3s ease-in-out;
   }
   #mainNav.navbar-shrink {
@@ -11719,10 +11728,11 @@ header.masthead .masthead-heading {
 }
 
 section#contact {
-  background-color: #212529;
-  background-image: url("../assets/img/map-image.png");
+  background-color: #ecf0ec;
+  background-image: url("../assets/contac.png");
   background-repeat: no-repeat;
   background-position: center;
+ 
 }
 section#contact .section-heading {
   color: #fff;
