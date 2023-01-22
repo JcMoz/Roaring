@@ -74,9 +74,34 @@ img.grande{
   width: 600px;
   height: 450px;
 }
+
+img.svg{
+  width: 20px; float:right; margin-right: 10px; margin-top: 10px;
+}
+.circular2 {
+  width: 5rem;
+height: 8rem;
+border: 0.5rem solid rgba(0, 0, 0, 0.1);
+}
+
 img.mediana{
   width: 500px;
   height: 500px;
+}
+
+.circular {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.circular img {
+  width: auto;
+  height: 100%;
+  margin-left: -50px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -7781,7 +7806,7 @@ textarea.form-control-lg {
 
 .text-muted {
   --bs-text-opacity: 1;
-  color: #fff !important;
+  color: #000 !important;
 }
 
 .text-black-50 {
@@ -11713,6 +11738,13 @@ header.masthead .masthead-heading {
   margin-bottom: 3rem;
   text-align: center;
 }
+
+.team-member2 img {
+  width: 8rem;
+  height: 5rem;
+  border: 0.5rem solid rgba(0, 0, 0, 0.1);
+}
+
 .team-member img {
   width: 14rem;
   height: 14rem;

@@ -1,129 +1,125 @@
 <?php
+session_start();
 include_once './Plantilla/cabecera.php';
+include_once './Plantilla/menu.php';
+
 ?>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="assets/img/2.svg" alt="..." /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars ms-1"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#portfolio">Services performed</a></li>
-                        <!--<li class="nav-item"><a class="nav-link" href="#about">About</a></li>-->
-                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Appointment</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container">
-               <!-- <div class="masthead-subheading">Welcome To!</div>-->
-                <div class="masthead-heading">Welcome To!</div>
-           
-            </div>
-        </header>
-        <!-- Services-->
-        <section class="page-section" id="services">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Our Service</h2>
-                    <h3 class="section-subheading text-muted">These are the services we provide</h3>
-                </div>
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fa-solid fa-handshake fa-stack-1x fa-inverse"></i>
-                            
-                        </span>
-                        <h4 class="my-3">On Time Cleaning</h4>
-                        <p class="text-muted">Our service always on time and efficient!</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fa-solid fa-paint-roller fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">Post Construction Cleaning</h4>
-                        <p class="text-muted">Post construction work area cleaning!</p>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fa-solid fa-truck fa-stack-1x fa-inverse"></i>
-                            
-                        </span>
-                        <h4 class="my-3">Moving Cleaning</h4>
-                        <p class="text-muted">We come to the comfort of your home!</p>
+
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container">
+        <!-- <div class="masthead-subheading">Welcome To!</div>-->
+        <div class="masthead-heading">Welcome To!</div>
+
+    </div>
+</header>
+
+<!-- Services-->
+<section class="page-section" id="services">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Our Service</h2>
+            <h3 class="section-subheading text-muted">These are the services we provide</h3>
+        </div>
+        <div class="row text-center">
+            <!--<div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa-solid fa-handshake fa-stack-1x fa-inverse"></i>
+
+                </span>
+                <h4 class="my-3">On Time Cleaning</h4>
+                <p class="text-muted">Our service always on time and efficient!</p>
+            </div>-->
+            <?php
+            include_once './conexion.php';
+            $query = "SELECT*FROM service WHERE estado='Activo'";
+            $result = $conexion->query($query);
+            while ($row = $result->fetch_assoc()) {
+            ?>
+
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle mediana" src="data:image/jpg;base64,<?php echo base64_encode($row['image']); ?>" alt="">
+
+                        <h4 class="my-3"><?php echo $row['name_service'] ?></h4>
+                        <p class="text-muted">Cost $<?php echo $row['cost_service'] ?></p>
+                        <p class="text-muted">Description: <?php echo $row['description'] ?></p>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- Portfolio Grid-->
-        <section class="page-section bg-light" id="portfolio">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Services performed</h2>
-                    <h3 class="section-subheading text-muted">Services rendered to our clients!</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 1-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid grande" src="assets/img/portfolio/pantry.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Pantry</div>
-                                <div class="portfolio-caption-subheading text-muted">Pantry Cleaning</div>
-                            </div>
+            <?php } ?>
+            <!--<div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa-solid fa-truck fa-stack-1x fa-inverse"></i>
+
+                </span>
+                <h4 class="my-3">Moving Cleaning</h4>
+                <p class="text-muted">We come to the comfort of your home!</p>
+            </div>-->
+        </div>
+    </div>
+</section>
+<hr>
+<!-- Portfolio Grid-->
+<section class="page-section bg-light" id="portfolio">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Services performed</h2>
+            <h3 class="section-subheading text-muted">Services rendered to our clients!</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 1-->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                         </div>
+                        <img class="img-fluid grande" src="assets/img/portfolio/pantry.jpg" alt="..." />
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Pantry</div>
+                        <div class="portfolio-caption-subheading text-muted">Pantry Cleaning</div>
                     </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 2-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid grande" src="assets/img/portfolio/oficina.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Office</div>
-                                <div class="portfolio-caption-subheading text-muted">Office Cleaning</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 3-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid grande" src="assets/img/portfolio/family.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Family Room</div>
-                                <div class="portfolio-caption-subheading text-muted">family room Cleaning</div>
-                            </div>
-                        </div>
-                    </div>
-        
                 </div>
             </div>
-        </section>
-        <!-- About-->
-        <!--<section class="page-section" id="about">
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 2-->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid grande" src="assets/img/portfolio/oficina.jpg" alt="..." />
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Office</div>
+                        <div class="portfolio-caption-subheading text-muted">Office Cleaning</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 3-->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                        <img class="img-fluid grande" src="assets/img/portfolio/family.jpg" alt="..." />
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Family Room</div>
+                        <div class="portfolio-caption-subheading text-muted">family room Cleaning</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- About-->
+<!--<section class="page-section" id="about">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">About</h2>
@@ -184,172 +180,300 @@ include_once './Plantilla/cabecera.php';
                 </ul>
             </div>
         </section>-->
-        <!-- Team-->
-        <section class="page-section bg-light" id="team">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Our incredible team, happy to serve you</h3>
-                </div>
-                <div class="row">
-                <div class="col-lg-2"></div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle mediana" src="assets/img/team/mario.jpg" alt="..." />
-                            <h4>Mario Orellana</h4>
-                            <p class="text-muted">owner</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/profile.php?id=100087215981075&is_tour_completed=true" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/juan.png" alt="..." />
-                            <h4>Juan Moz</h4>
-                            <p class="text-muted">Collaborator</p>
-                            <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/profile.php?id=100087215981075&is_tour_completed=true" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
-                            
-                        </div>
-                    </div>
-                  
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">A pleasure to serve you and provide you with our general cleaning services</p></div>
+<!-- Team-->
+<section class="page-section bg-light" id="team">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+            <h3 class="section-subheading text-muted">Our incredible team, happy to serve you</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle mediana" src="assets/img/team/mario.jpg" alt="..." />
+                    <h4>Mario Orellana</h4>
+                    <p class="text-muted">owner</p>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/profile.php?id=100087215981075&is_tour_completed=true" aria-label="Parveen Anand Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+
                 </div>
             </div>
-        </section>
-        <!-- Clients-->
-        <div class="py-5">
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="assets/img/team/juan.png" alt="..." />
+                    <h4>Juan Moz</h4>
+                    <p class="text-muted">Collaborator</p>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/profile.php?id=100087215981075&is_tour_completed=true" aria-label="Diana Petersen Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <p class="large text-muted">A pleasure to serve you and provide you with our general cleaning services</p>
+            </div>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+
+</section>
+<!-- Clients-->
+<div class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-2 col-sm-6 my-3">
+                <!--<a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/microsoft.svg" alt="..." aria-label="Microsoft Logo" /></a>-->
+            </div>
+            <div class="col-md-3 col-sm-6 my-3">
+                <!-- <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/google.svg" alt="..." aria-label="Google Logo" /></a>-->
+            </div>
+            <div class="col-md-3 col-sm-6 my-3">
+                <a href="https://www.facebook.com/profile.php?id=100087215981075&is_tour_completed=true"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/facebook.svg" alt="..." aria-label="Facebook Logo" /></a>
+            </div>
+            <div class="col-md-3 col-sm-6 my-3">
+                <!-- <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/ibm.svg" alt="..." aria-label="IBM Logo" /></a>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact-->
+<section class="page-section" id="contact">
+    <div class="container">
+        <div class="text-center">
+
+            <h2 class="section-heading text-uppercase text-primary">Appointment</h2>
+            <h3 class="section-subheading text-muted text-primary">Book your appointment here!</h3>
+
+        </div>
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- * * SB Forms Contact Form * *-->
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- This form is pre-integrated with SB Forms.-->
+        <!-- To make this form functional, sign up at-->
+        <!-- https://startbootstrap.com/solution/contact-forms-->
+        <!-- to get an API token!-->
+        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+            <div class="row align-items-stretch mb-5">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- Name input-->
+                        <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                    </div>
+                    <div class="form-group">
+                        <!-- Email address input-->
+                        <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                    </div>
+                    <div class="form-group mb-md-0">
+                        <!-- Phone number input-->
+                        <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-textarea mb-md-0">
+                        <!-- Message input-->
+                        <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
+                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Submit success message-->
+            <!---->
+            <!-- This is what your users will see when the form-->
+            <!-- has successfully submitted-->
+            <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center text-white mb-3">
+                    <div class="fw-bolder">Form submission successful!</div>
+                    To activate this form, sign up at
+                    <br />
+                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                </div>
+            </div>
+            <!-- Submit error message-->
+            <!---->
+            <!-- This is what your users will see when there is-->
+            <!-- an error submitting the form-->
+            <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">Error sending message!</div>
+            </div>
+            <!-- Submit Button-->
+            <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send</button></div>
+        </form>
+        <!--BOTON DEL CHAT-->
+        <a data-bs-toggle="modal" href="#chat" class="btn-flotante"> <i class="fas fa-envelope fa-fw"></i></a>
+        <!--FIN BOTON DE CHAT-->
+    </div>
+</section>
+<!-- Footer-->
+<footer class="footer py-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-lg-start">Copyright &copy; Roaring Fork Cleaning Service 2022</div>
+            <div class="col-lg-4 my-3 my-lg-0">
+                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/profile.php?id=100087215981075&is_tour_completed=true" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+
+            </div>
+            <div class="col-lg-4 text-lg-end">
+
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Portfolio Modals-->
+<!-- Portfolio item 1 modal popup-->
+<div class="modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img style="width: 20px; float:right; margin-right: 10px; margin-top: 10px;" src="assets/img/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-2 col-sm-6 my-3">
-                        <!--<a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/microsoft.svg" alt="..." aria-label="Microsoft Logo" /></a>-->
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                       <!-- <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/google.svg" alt="..." aria-label="Google Logo" /></a>-->
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="https://www.facebook.com/profile.php?id=100087215981075&is_tour_completed=true"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/facebook.svg" alt="..." aria-label="Facebook Logo" /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                       <!-- <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/ibm.svg" alt="..." aria-label="IBM Logo" /></a>-->
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase">Pantry Cleaning</h2>
+                            <p class="item-intro text-muted">Cleaning</p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/pantry.jpg" alt="..." />
+                            <p>cleaning carried out in the pantry of our clients</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Client:</strong>
+                                    Mario Orellana
+                                </li>
+                                <li>
+                                    <strong>Category:</strong>
+                                    Pantry Cleaning
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <i class="fas fa-xmark me-1"></i>
+                                Close
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Contact-->
-        <section class="page-section" id="contact">
+    </div>
+</div>
+<!-- Portfolio item 2 modal popup-->
+<div class="modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img style="width: 20px; float:right; margin-right: 10px; margin-top: 10px;" src="assets/img/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
-                <div class="text-center">
-                  
-                    <h2 class="section-heading text-uppercase text-primary">Appointment</h2>
-                    <h3 class="section-subheading text-muted text-primary">Book your appointment here!</h3>
-                
-                </div>
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- * * SB Forms Contact Form * *-->
-                <!-- * * * * * * * * * * * * * * *-->
-                <!-- This form is pre-integrated with SB Forms.-->
-                <!-- To make this form functional, sign up at-->
-                <!-- https://startbootstrap.com/solution/contact-forms-->
-                <!-- to get an API token!-->
-                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                    <div class="row align-items-stretch mb-5">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <!-- Name input-->
-                                <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                            </div>
-                            <div class="form-group">
-                                <!-- Email address input-->
-                                <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
-                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                            </div>
-                            <div class="form-group mb-md-0">
-                                <!-- Phone number input-->
-                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
-                            </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase">Office</h2>
+                            <p class="item-intro text-muted">Cleaning</p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/oficina.jpg" alt="..." />
+                            <p>office cleaning done by our cleaning group!</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Client:</strong>
+                                    Mario Orellana
+                                </li>
+                                <li>
+                                    <strong>Category:</strong>
+                                    Office Cleaning
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <i class="fas fa-xmark me-1"></i>
+                                Close
+                            </button>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-textarea mb-md-0">
-                                <!-- Message input-->
-                                <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Submit success message-->
-                    <!---->
-                    <!-- This is what your users will see when the form-->
-                    <!-- has successfully submitted-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center text-white mb-3">
-                            <div class="fw-bolder">Form submission successful!</div>
-                            To activate this form, sign up at
-                            <br />
-                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                        </div>
-                    </div>
-                    <!-- Submit error message-->
-                    <!---->
-                    <!-- This is what your users will see when there is-->
-                    <!-- an error submitting the form-->
-                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                    <!-- Submit Button-->
-                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send</button></div>
-                </form>
-            </div>
-        </section>
-        <!-- Footer-->
-        <footer class="footer py-4">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-start">Copyright &copy; Roaring Fork Cleaning Service 2022</div>
-                    <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/profile.php?id=100087215981075&is_tour_completed=true" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                       
-                    </div>
-                    <div class="col-lg-4 text-lg-end">
-                       
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- Portfolio Modals-->
-        <!-- Portfolio item 1 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h2 class="text-uppercase">Pantry Cleaning</h2>
-                                    <p class="item-intro text-muted">Cleaning</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/pantry.jpg" alt="..." />
-                                    <p>cleaning carried out in the pantry of our clients</p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Client:</strong>
-                                            Mario Orellana
-                                        </li>
-                                        <li>
-                                            <strong>Category:</strong>
-                                            Pantry Cleaning
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Close
-                                    </button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Portfolio item 3 modal popup-->
+<div class="modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img style="width: 20px; float:right; margin-right: 10px; margin-top: 10px;" src="assets/img/close-icon.svg" alt="Close modal" /></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase">Family Room</h2>
+                            <p class="item-intro text-muted"></p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/family.jpg" alt="..." />
+                            <p>family room cleaning!</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Client:</strong>
+                                    Mario Orellana
+                                </li>
+                                <li>
+                                    <strong>Category:</strong>
+                                    Family Room
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <i class="fas fa-xmark me-1"></i>
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--MODAL CHAT -->
+<div class="modal fade" id="chat" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img style="width: 20px; float:right; margin-right: 10px; margin-top: 10px;" src="assets/img/close-icon.svg" alt="Close modal" /></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10">
+                                    <p><a href="#">click if you still do not have a chat account</a></p>
+
+                                </div>
+                                <div class="col-lg-10">
+                                    <form action="session.php" method="POST">
+                                        <div class="row align-items-stretch mb-5">
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                    <!-- Name input-->
+                                                    <input class="form-control"  name="name" type="text" placeholder="Your User Name *"  />
+                                              
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <!-- Email address input-->
+                                                    <input class="form-control"  name="password" type="password" placeholder="Your Password *"  />
+                                                </div>
+                                                
+                                            </div>
+                                           
+                                        </div>
+
+                                        <!-- Submit Button-->
+                                        <div class="text-center"><input type="submit" name="g" class="btn btn-primary text-uppercase" id="chatButton"  value="Send"/></div>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
@@ -357,87 +481,11 @@ include_once './Plantilla/cabecera.php';
                 </div>
             </div>
         </div>
-        <!-- Portfolio item 2 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h2 class="text-uppercase">Office</h2>
-                                    <p class="item-intro text-muted">Cleaning</p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/oficina.jpg" alt="..." />
-                                    <p>office cleaning done by our cleaning group!</p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Client:</strong>
-                                            Mario Orellana
-                                        </li>
-                                        <li>
-                                            <strong>Category:</strong>
-                                            Office Cleaning
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Close
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Portfolio item 3 modal popup-->
-        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="modal-body">
-                                    <!-- Project details-->
-                                    <h2 class="text-uppercase">Family Room</h2>
-                                    <p class="item-intro text-muted"></p>
-                                    <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/family.jpg" alt="..." />
-                                    <p>family room cleaning!</p>
-                                    <ul class="list-inline">
-                                        <li>
-                                            <strong>Client:</strong>
-                                            Mario Orellana
-                                        </li>
-                                        <li>
-                                            <strong>Category:</strong>
-                                            Family Room
-                                        </li>
-                                    </ul>
-                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                        <i class="fas fa-xmark me-1"></i>
-                                        Close
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
-</html>
+    </div>
+</div>
+<!--FIN MODAL CHAT-->
+
+
+<?php
+include_once "./Plantilla/fin.php"
+?>
