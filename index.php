@@ -457,7 +457,7 @@ include_once './Plantilla/menu.php';
                                             <div class="col-md-10">
                                                 <div class="form-group">
                                                     <!-- Name input-->
-                                                    <input class="form-control"  name="name" type="text" placeholder="Your User Name *"  />
+                                                    <input class="form-control"  name="correo" type="email" placeholder="Your email *"  />
                                               
                                                 </div>
                                                 <br>

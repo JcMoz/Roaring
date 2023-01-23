@@ -235,6 +235,7 @@ $result = $conexion->query($query);
             });
 
         });
+        document.getElementById('msgBody').scrollTop=5000;
     });
 
 </script>
