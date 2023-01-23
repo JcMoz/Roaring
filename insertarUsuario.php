@@ -3,7 +3,7 @@ session_start();
  include_once "./conexion.php";
  $name  = $_POST["name"];
  $correo    = $_POST["correo"];
- $con   = $_POST["pass2"];
+ $con   = $_POST["password2"];
  $tipo="cl";
  $clave =  password_hash($con, PASSWORD_DEFAULT);
 
@@ -12,7 +12,8 @@ session_start();
         VALUES ('$name','$clave','$correo','$tipo')";
  $resultado = $conexion->query($sms);
 
- if($resultado){header("location:index.php");}
+ if($resultado){header("location:index.php");
+  }
  
 
 ?>

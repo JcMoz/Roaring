@@ -448,7 +448,7 @@ include_once './Plantilla/menu.php';
                         <div class="modal-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-10">
-                                    <p><a href="#">click if you still do not have a chat account</a></p>
+                                    <p><a href="RegistroUsuario.php">click if you still do not have a chat account</a></p>
 
                                 </div>
                                 <div class="col-lg-10">
