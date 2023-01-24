@@ -306,7 +306,7 @@ include_once './Plantilla/menu.php';
             <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send</button></div>
         </form>
         <!--BOTON DEL CHAT-->
-        <a data-bs-toggle="modal" href="#chat" class="btn-flotante"> <i class="fas fa-envelope fa-fw"></i></a>
+        <a data-bs-toggle="modal" href="#chat" class="btn-flotante"> <i class="fas fa-fa-comments"></i></a>
         <!--FIN BOTON DE CHAT-->
     </div>
 </section>
