@@ -43,7 +43,6 @@ include_once './Plantilla/menu.php';
                         <img class="mx-auto rounded-circle mediana" src="data:image/jpg;base64,<?php echo base64_encode($row['image']); ?>" alt="">
 
                         <h4 class="my-3"><?php echo $row['name_service'] ?></h4>
-                        <p class="text-muted">Cost $<?php echo $row['cost_service'] ?></p>
                         <p class="text-muted">Description: <?php echo $row['description'] ?></p>
                     </div>
                 </div>
@@ -61,6 +60,7 @@ include_once './Plantilla/menu.php';
     </div>
 </section>
 <hr>
+
 <!-- Portfolio Grid-->
 <section class="page-section bg-light" id="portfolio">
     <div class="container">
@@ -118,9 +118,54 @@ include_once './Plantilla/menu.php';
         </div>
     </div>
 </section>
+
+<!--SECCION DE PREGUNTAS-->
+<section class="page-section" id="questions">
+    <div class="container">
+        <div class="text-center">
+
+            <h2 class="section-heading text-uppercase text-primary">Questions</h2>
+            <h3 class="section-subheading text-muted text-primary">You can ask your questions in this section or use our chat</h3>
+
+        </div>
+
+        <form id="">
+            <div class="row align-items-stretch mb-5">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- Name input-->
+                        <input class="form-control" id="correo-question" type="email" placeholder="Your email *" onkeyup="validarEmail(this)" autocomplete="off" />
+                        <p id="resultado"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-stretch mb-5">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-textarea mb-md-0">
+                        <!-- Message input-->
+                        <textarea class="form-control" id="message-question" placeholder="Your question *" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button-->
+            <div class="text-center">
+                <button class="btn btn-success" id="send_question" type="button">Send</button>
+            </div>
+        </form>
+        <!--BOTON DEL CHAT-->
+        <a data-bs-toggle="modal" href="#chat" class="btn-flotante"> <i class="fas fa-comments"></i></a>
+        <!--FIN BOTON DE CHAT-->
+    </div>
+</section>
+<!--SECCION DE PREGUNTAS FIN-->
+
+<hr>
 <!-- About-->
 <!--<section class="page-section" id="about">
-            <div class="container">
+                <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">About</h2>
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
@@ -306,7 +351,7 @@ include_once './Plantilla/menu.php';
             <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send</button></div>
         </form>
         <!--BOTON DEL CHAT-->
-        <a data-bs-toggle="modal" href="#chat" class="btn-flotante"> <i class="fas fa-fa-comments"></i></a>
+        <a data-bs-toggle="modal" href="#chat" class="btn-flotante"> <i class="fas fa-comments"></i></a>
         <!--FIN BOTON DE CHAT-->
     </div>
 </section>
@@ -457,21 +502,21 @@ include_once './Plantilla/menu.php';
                                             <div class="col-md-10">
                                                 <div class="form-group">
                                                     <!-- Name input-->
-                                                    <input class="form-control"  name="correo" type="email" placeholder="Your email *"  />
-                                              
+                                                    <input class="form-control" name="correo" type="email" placeholder="Your email *" />
+
                                                 </div>
                                                 <br>
                                                 <div class="form-group">
                                                     <!-- Email address input-->
-                                                    <input class="form-control"  name="password" type="password" placeholder="Your Password *"  />
+                                                    <input class="form-control" name="password" type="password" placeholder="Your Password *" />
                                                 </div>
-                                                
+
                                             </div>
-                                           
+
                                         </div>
 
                                         <!-- Submit Button-->
-                                        <div class="text-center"><input type="submit" name="g" class="btn btn-primary text-uppercase" id="chatButton"  value="Send"/></div>
+                                        <div class="text-center"><input type="submit" name="g" class="btn btn-primary text-uppercase" id="chatButton" value="Send" /></div>
                                     </form>
 
                                 </div>
@@ -484,6 +529,70 @@ include_once './Plantilla/menu.php';
     </div>
 </div>
 <!--FIN MODAL CHAT-->
+
+<script type="text/javascript">
+    function validarEmail(elemento) {
+
+        var texto = document.getElementById(elemento.id).value;
+        var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+        if (!regex.test(texto)) {
+            document.getElementById("resultado").innerHTML = "Correo invalido";
+            $('#resultado').addClass('alert alert-danger');
+            document.getElementById('send_question').disabled = true;
+
+        } else {
+            document.getElementById("resultado").innerHTML = "";
+            $('#resultado').removeClass('alert alert-danger');
+            document.getElementById('send_question').disabled = false;
+
+        }
+
+    }
+    $(document).ready(function() {
+
+
+
+                $("#send_question").on("click", function() {
+                        if (
+                            $("#correo-question").val() == "" ||
+                            $("#message-question").val() == ""
+                            
+                        ) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "error",
+                                text: "Empty fields",
+                            });
+                        } else {
+
+                            $.ajax({
+                                url: "insertar_question.php",
+                                method: "POST",
+                                data: {
+                                    correo: $("#correo-question").val(),
+                                    message: $("#message-question").val()
+                                },
+                                dataType: "text",
+                                success: function(data) {
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Question done correctly",
+                                        text: "Your answer will be sent to your email",
+                                    });
+                                    $("#correo-question").val("");
+                                    $("#message-question").val("");
+
+                                }
+
+
+                            });
+                        }
+                        });
+                    
+
+                });
+</script>
 
 
 <?php
