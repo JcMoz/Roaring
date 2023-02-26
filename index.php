@@ -6,23 +6,43 @@ include_once './Plantilla/menu.php';
 ?>
 
 <!-- Masthead-->
-<header class="masthead">
-    <div class="container">
-        <!-- <div class="masthead-subheading">Welcome To!</div>-->
-        <div class="masthead-heading">Welcome To!</div>
+<header class="slider">
+    <img src="./carousel/img/colorado1.jpg">
+    <img src="./carousel/img/colorado2.jpg">
+    <img src="./carousel/img/colorado3.jpg">
 
-    </div>
+    <img src="./carousel/img/puente.jpg">
+    <img src="./carousel/img/jardin.jpg">
+    <img src="./carousel//img/puente.jpg">
+
 </header>
+<style>
+    .carousel-item {
+        width: 100%;
+        height: 400px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: 100%;
+
+    }
+</style>
 
 <!-- Services-->
 <section class="page-section" id="services">
-    <div class="container">
-        <div class="text-center">
-            <h2 class="section-heading text-uppercase">Our Service</h2>
-            <h3 class="section-subheading text-muted">These are the services we provide</h3>
-        </div>
-        <div class="row text-center">
-            <!--<div class="col-md-4">
+    <div class="row justify-content-md-center">
+        <div class="col-md-10 ">
+            <div class="card">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-heading text-uppercase">Our Service</h2>
+                        <h3 class="section-subheading text-muted">These are the services we provide</h3>
+                    </div>
+                    <div class="row text-center">
+                        <!--<div class="col-md-4">
                 <span class="fa-stack fa-4x">
                     <i class="fas fa-circle fa-stack-2x text-primary"></i>
                     <i class="fa-solid fa-handshake fa-stack-1x fa-inverse"></i>
@@ -31,23 +51,23 @@ include_once './Plantilla/menu.php';
                 <h4 class="my-3">On Time Cleaning</h4>
                 <p class="text-muted">Our service always on time and efficient!</p>
             </div>-->
-            <?php
-            include_once './conexion.php';
-            $query = "SELECT*FROM service WHERE estado='Activo'";
-            $result = $conexion->query($query);
-            while ($row = $result->fetch_assoc()) {
-            ?>
+                        <?php
+                        include_once './conexion.php';
+                        $query = "SELECT*FROM service WHERE estado='Activo'";
+                        $result = $conexion->query($query);
+                        while ($row = $result->fetch_assoc()) {
+                        ?>
 
-                <div class="col-md-4">
-                    <div class="team-member">
-                        <img class="mx-auto rounded-circle mediana" src="data:image/jpg;base64,<?php echo base64_encode($row['image']); ?>" alt="">
+                            <div class="col-md-4">
+                                <div class="team-member">
+                                    <img class="mx-auto rounded-circle mediana" src="data:image/jpg;base64,<?php echo base64_encode($row['image']); ?>" alt="">
 
-                        <h4 class="my-3"><?php echo $row['name_service'] ?></h4>
-                        <p class="text-muted">Description: <?php echo $row['description'] ?></p>
-                    </div>
-                </div>
-            <?php } ?>
-            <!--<div class="col-md-4">
+                                    <h4 class="my-3"><?php echo $row['name_service'] ?></h4>
+                                    <p class="text-muted">Description: <?php echo $row['description'] ?></p>
+                                </div>
+                            </div>
+                        <?php } ?>
+                        <!--<div class="col-md-4">
                 <span class="fa-stack fa-4x">
                     <i class="fas fa-circle fa-stack-2x text-primary"></i>
                     <i class="fa-solid fa-truck fa-stack-1x fa-inverse"></i>
@@ -56,8 +76,14 @@ include_once './Plantilla/menu.php';
                 <h4 class="my-3">Moving Cleaning</h4>
                 <p class="text-muted">We come to the comfort of your home!</p>
             </div>-->
+                    </div>
+                </div>
+            </div>
+
         </div>
+
     </div>
+
 </section>
 <hr>
 
@@ -68,52 +94,64 @@ include_once './Plantilla/menu.php';
             <h2 class="section-heading text-uppercase">Services performed</h2>
             <h3 class="section-subheading text-muted">Services rendered to our clients!</h3>
         </div>
-        <div class="row">
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 1-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid grande" src="assets/img/portfolio/pantry.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Pantry</div>
-                        <div class="portfolio-caption-subheading text-muted">Pantry Cleaning</div>
+
+        <div class="row justify-content-md-center">
+            <div class="col-lg-10 col-sm-12 mb-2">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide">
+                    <div class="carousel-indicators">
+                        <?php
+                        $query = "SELECT*,ROW_NUMBER() OVER(ORDER BY id ASC) AS fila FROM performed WHERE estado='Activo'";
+                        $result = $conexion->query($query);
+                        while ($ok = $result->fetch_assoc()) {
+                            if ($ok['fila'] == 1) {
+                        ?>
+                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?php echo $ok['fila'] - 1 ?>" class="active" aria-current="true" aria-label="Slide <?php echo $ok['fila'] - 1 ?>"></button>
+                            <?php } else { ?>
+                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<?php echo $ok['fila'] - 1 ?>" aria-label="Slide <?php echo $ok['fila'] - 1 ?>"></button>
+                        <?php }
+                        } ?>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 2-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid grande" src="assets/img/portfolio/oficina.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Office</div>
-                        <div class="portfolio-caption-subheading text-muted">Office Cleaning</div>
+                    <div class="carousel-inner">
+                        <?php
+                        $query = "SELECT p. descripcion, p.image, p.cliente,s.name_service,ROW_NUMBER() OVER(ORDER BY p.id ASC) AS fila FROM performed p INNER join service s on p.id_servicio=s.id WHERE p.estado='Activo'";
+                        $result = $conexion->query($query);
+                        while ($ok = $result->fetch_assoc()) {
+                            if ($ok['fila'] == 1) {
+                        ?>
+                                <div class="carousel-item active" data-bs-interval="5000">
+                                    <img src="data:image/jpg;base64,<?php echo base64_encode($ok['image']); ?>" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Service name: <?php echo $ok['name_service'] ?></h5>
+                                        <p>Description: <?php echo $ok['descripcion'] ?></p>
+                                        <h5>Customer: <?php echo $ok['cliente'] ?></h5>
+
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+
+                                <div class="carousel-item" data-bs-interval="2000">
+                                    <img src="data:image/jpg;base64,<?php echo base64_encode($ok['image']); ?>" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Service name: <?php echo $ok['name_service'] ?></h5>
+                                        <p>Description: <?php echo $ok['descripcion'] ?></p>
+                                        <h5>Customer: <?php echo $ok['cliente'] ?></h5>
+                                    </div>
+                                </div>
+                        <?php }
+                        } ?>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
+
             </div>
-            <div class="col-lg-4 col-sm-6 mb-4">
-                <!-- Portfolio item 3-->
-                <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <img class="img-fluid grande" src="assets/img/portfolio/family.jpg" alt="..." />
-                    </a>
-                    <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Family Room</div>
-                        <div class="portfolio-caption-subheading text-muted">family room Cleaning</div>
-                    </div>
-                </div>
-            </div>
+
 
         </div>
     </div>
@@ -121,43 +159,66 @@ include_once './Plantilla/menu.php';
 
 <!--SECCION DE PREGUNTAS-->
 <section class="page-section" id="questions">
-    <div class="container">
-        <div class="text-center">
+    <div class="row justify-content-md-center">
+        <div class="col-md-10 ">
+            <div class="card">
 
-            <h2 class="section-heading text-uppercase text-primary">Questions</h2>
-            <h3 class="section-subheading text-muted text-primary">You can ask your questions in this section or use our chat</h3>
+                <div class="container mt-2">
+                    <div class="text-center">
 
+                        <h2 class="section-heading text-uppercase text-primary">Questions</h2>
+                        <h3 class="section-subheading text-muted text-primary">You can ask your questions in this section or use our chat</h3>
+
+                    </div>
+
+                    <form id="">
+                        <div class="row">
+                            <div class="row align-items-stretch mb-5">
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <!-- Name input-->
+                                        <input class="form-control" id="name" type="text" placeholder="Your Name *" autocomplete="off" />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-stretch mb-5">
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <!-- Name input-->
+                                        <input class="form-control" id="correo-question" type="email" placeholder="Your email *" onkeyup="validarEmail(this)" autocomplete="off" />
+                                        <p id="resultado"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-stretch mb-2">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-textarea mb-md-0">
+                                        <!-- Message input-->
+                                        <textarea class="form-control" id="message-question" placeholder="Your question *" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button-->
+                            <div class="text-center mt-2">
+                                <button class="btn btn-success" id="send_question" type="button">Send</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+                    <!--BOTON DEL CHAT-->
+                    <a data-bs-toggle="modal" href="#chat" class="btn-flotante"> <i class="fas fa-comments"></i></a>
+                    <!--FIN BOTON DE CHAT-->
+                </div>
+            </div>
         </div>
-
-        <form id="">
-            <div class="row align-items-stretch mb-5">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <!-- Name input-->
-                        <input class="form-control" id="correo-question" type="email" placeholder="Your email *" onkeyup="validarEmail(this)" autocomplete="off" />
-                        <p id="resultado"></p>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-stretch mb-5">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="form-group form-group-textarea mb-md-0">
-                        <!-- Message input-->
-                        <textarea class="form-control" id="message-question" placeholder="Your question *" required></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Submit Button-->
-            <div class="text-center">
-                <button class="btn btn-success" id="send_question" type="button">Send</button>
-            </div>
-        </form>
-        <!--BOTON DEL CHAT-->
-        <a data-bs-toggle="modal" href="#chat" class="btn-flotante"> <i class="fas fa-comments"></i></a>
-        <!--FIN BOTON DE CHAT-->
     </div>
 </section>
 <!--SECCION DE PREGUNTAS FIN-->
@@ -553,45 +614,47 @@ include_once './Plantilla/menu.php';
 
 
 
-                $("#send_question").on("click", function() {
-                        if (
-                            $("#correo-question").val() == "" ||
-                            $("#message-question").val() == ""
-                            
-                        ) {
-                            Swal.fire({
-                                icon: "error",
-                                title: "error",
-                                text: "Empty fields",
-                            });
-                        } else {
+        $("#send_question").on("click", function() {
+            if (
+                $("#name").val() == "" ||
+                $("#correo-question").val() == "" ||
+                $("#message-question").val() == ""
 
-                            $.ajax({
-                                url: "insertar_question.php",
-                                method: "POST",
-                                data: {
-                                    correo: $("#correo-question").val(),
-                                    message: $("#message-question").val()
-                                },
-                                dataType: "text",
-                                success: function(data) {
-                                    Swal.fire({
-                                        icon: "success",
-                                        title: "Question done correctly",
-                                        text: "Your answer will be sent to your email",
-                                    });
-                                    $("#correo-question").val("");
-                                    $("#message-question").val("");
+            ) {
+                Swal.fire({
+                    icon: "error",
+                    title: "error",
+                    text: "Empty fields",
+                });
+            } else {
 
-                                }
-
-
-                            });
-                        }
+                $.ajax({
+                    url: "insertar_question.php",
+                    method: "POST",
+                    data: {
+                        name: $("#name").val(),
+                        correo: $("#correo-question").val(),
+                        message: $("#message-question").val()
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Question done correctly",
+                            text: "Your answer will be sent to your email",
                         });
-                    
+                        $("#correo-question").val("");
+                        $("#message-question").val("");
+
+                    }
+
 
                 });
+            }
+        });
+
+
+    });
 </script>
 
 

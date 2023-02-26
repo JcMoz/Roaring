@@ -1,11 +1,12 @@
 <?php
 session_start();
  include_once "./conexion.php";
+ $name  = $_POST["name"];
  $correo  = $_POST["correo"];
  $message    = $_POST["message"];
  
- $sms= "INSERT INTO question (correo,question)
-        VALUES ('$correo','$message')";
+ $sms= "INSERT INTO question (correo,question,name)
+        VALUES ('$correo','$message','$name')";
  $resultado = $conexion->query($sms);
 
 
@@ -17,7 +18,7 @@ session_start();
     $mailSend = new clsMailer();
 
     $bodyHTML ='
-    <h2>you have asked a question in
+    <h2>Hola '.$name.', you have asked a question in
     Roaring Fork Cleaning Service, the administrator will contact and respond via email</h2>
     <br>
     <br>
